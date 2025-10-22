@@ -1,0 +1,11 @@
+services:
+  server-app:
+    build: .
+
+  client-app:
+    build: .
+    depends_on:
+      - server-app
+    command: ["java", "TictactoeClient"]
+    stdin_open: true 
+    tty: true

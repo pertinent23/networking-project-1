@@ -1,0 +1,55 @@
+\documentclass[11pt]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\title{Introduction to Computer Networking\\Tic-tac-toe Project Report}
+
+\author{Firstname Lastname \\ Student ID: XXXXX}
+\date{October 26, 2025}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+Briefly summarize the assignment objective and describe what your program achieves.
+
+\section{Software Architecture}
+Present the overall structure of your program. 
+\begin{itemize}
+    \item Which classes did you create and what are their roles?
+    \item How do these classes interact?
+\end{itemize}
+
+\section{Program logic}
+How does your \textbf{server} work? Sequentially describe at a high level which operations it performs for accepting a connection to the end of a game. Limit yourself to a single-player game.
+
+
+\section{TCP Stream}
+Describe how you read from the TCP stream.  
+Explain how you handle message boundaries.
+
+\section{Multi-threading}
+Explain how your server supports multiple clients.  
+How does the server enable multiple games (single and multiplayer) to be played simultaneously without interfering with each other/
+
+\section{Robustness}
+Discuss the mechanisms you used to make your server robust. This should include exception management, network errors and malevolent requests.
+
+\section{Conclusion}
+Reflect on your work:
+\begin{itemize}
+    \item What was most challenging?
+    \item What did you learn?
+\end{itemize}
+
+\end{document}
