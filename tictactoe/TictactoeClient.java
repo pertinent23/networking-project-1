@@ -3,8 +3,9 @@ import java.net.Socket;
 import java.util.Scanner;
 
 /**
- * TictactoeClient represent a player that connect to the tictactoe server
- * and play against another player or againt a bot
+ * TictactoeClient represent we want to be connected  to a Tictactoe server
+ * using his terminal, it can start a game
+ * against another player or againt a bot
 */
 public class TictactoeClient extends Client {
     /**
@@ -252,6 +253,8 @@ public class TictactoeClient extends Client {
                             throw new TictactoeBadResponseException();
                         });
 
+                        // if we fail to start a player game it mean that
+                        // we are not connected to the server anymore
                         if (!client.startPlayer()) {
                             client.quit();
                         }
@@ -290,6 +293,9 @@ public class TictactoeClient extends Client {
                         });
 
                         client.setClientType(ClientType.fromString(readedLine));
+
+                        // if we fail to start a bot game it mean that
+                        // we are not connected to the server anymore
                         if (!client.startBot()) {
                             client.quit();
                         }
@@ -354,6 +360,8 @@ public class TictactoeClient extends Client {
                                         throw new TictactoeBadResponseException();
                                     });
 
+                                    //if we fail to send the update request it mean that
+                                    // we are not connected to the server anymore
                                     if(!client.update()) {
                                         client.quit();
                                     }
@@ -449,27 +457,35 @@ public class TictactoeClient extends Client {
 
             } catch (ClientGetStreamException e) {
                 // if we fail to get the input/output stream of the client
+                // that should never happen
                 System.exit(1);
             } catch (IllegalThreadStateException e) {
                 // if we try to start a thread that is already started
+                // that should never happen
                 System.exit(2);
             } catch (TictactoeBadResponseException e) {
                 // if we receive a bad response from the server
+                // we exit the program
+                // that mean that the server is not working properly
+                // Because "WRONG" is not considered as a bad response
                 System.exit(3);
             } catch (InterruptedException e) {
                 // if the thread is interrupted
+                // that should never happen
                 System.exit(4);
             } catch( TictactoeTimeoutException e) {
                 // if we fail to set the timeout of the socket
+                // That mean that the server is not responding
                 System.exit(5);
             }
         } catch (IOException e) {
             // if we fail to connect to the server
             // we print an error message and exit the program
-            System.exit(1);
+            System.exit(6);
         } catch(IllegalArgumentException e) {
             // this should never happen
             // Because it happen only if the port is invalid
+            System.exit(7);
         }
 
         scanner.close();

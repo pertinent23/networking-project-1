@@ -1,4 +1,6 @@
-
+import java.util.List;
+import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 /**
  * This class represnets  the game logic on the server side.
  * It handles the game state, player turns, and win conditions.
@@ -324,19 +326,32 @@ public class ServerGame {
     /**
      * If the game is against a bot, make the bot play its turn
      * The bot plays as player O
+     * to play, the bot selects a random available cell
+     * It places its mark there and toggles the current player
     */
 
     private void botPlay() {
-        // simple bot logic: play the first available cell
+        List <Integer> available = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (this.grid[i][j] == null) {
-                    this.grid[i][j] = this.currentPlayer; // assuming bot is always O
-                    toogleCurrentPlayer();
-                    return;
+                    // available cell
+                    available.add(i * 3 + j);
                 }
             }
         }
+
+        // if there is not available cell, do nothing
+        if (available.isEmpty()) {
+            return;
+        }
+
+        int index = ThreadLocalRandom.current().nextInt(available.size());
+        int pos = available.get(index);
+        int row = pos / 3;
+        int col = pos % 3;
+        this.grid[row][col] = this.currentPlayer;
+        toogleCurrentPlayer();
     }
 
 }
