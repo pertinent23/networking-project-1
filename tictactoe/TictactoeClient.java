@@ -299,16 +299,14 @@ public class TictactoeClient extends Client {
                          * we have to wait for the bot to play
                          * before showing the menu
                         */
-                        if (client.getType().equals(ClientType.O)) {
-                            client.wait(TictactoeConst.RESPONSE_TIMEOUT);
+                        client.wait(TictactoeConst.RESPONSE_TIMEOUT);
 
-                            if (!client.hasLastResponse()) {
-                                throw new TictactoeTimeoutException();
-                            }
-                        
-                            client.clearLastResponse();
-                            client.removeListener();
+                        if (!client.hasLastResponse()) {
+                            throw new TictactoeTimeoutException();
                         }
+                    
+                        client.clearLastResponse();
+                        client.removeListener();
                     }
                 }
 

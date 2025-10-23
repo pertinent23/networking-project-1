@@ -21,7 +21,7 @@ public class ServerGame {
      * ClientType.X means the cell is occupied by player X
      * ClientType.O means the cell is occupied by player O 
     */
-    private ClientType grip[][] = new ClientType[3][3];
+    private ClientType grid[][] = new ClientType[3][3];
 
     /*
      * currentPlayer indicates whose turn it is
@@ -116,12 +116,12 @@ public class ServerGame {
         }
 
         // check if the cell is already occupied
-        if (this.grip[row][col] != null) {
+        if (this.grid[row][col] != null) {
             return "CELL OCCUPIED".concat(TictactoeConst.END_OF_MESSAGE);
         }
 
         // place the player's mark on the grid
-        grip[row][col] = this.currentPlayer;
+        grid[row][col] = this.currentPlayer;
 
         // switch to the other player
         toogleCurrentPlayer();
@@ -208,20 +208,20 @@ public class ServerGame {
         boolean allFilled = true;
 
         for (int i = 0; i < 3; i++) {
-            if (grip[i][0] != null && grip[i][0] == grip[i][1] && grip[i][1] == grip[i][2]) {
+            if (grid[i][0] != null && grid[i][0] == grid[i][1] && grid[i][1] == grid[i][2]) {
                 isWin = true;
-                winner = grip[i][0];
+                winner = grid[i][0];
                 return;
             }
-            if (grip[0][i] != null && grip[0][i] == grip[1][i] && grip[1][i] == grip[2][i]) {
+            if (grid[0][i] != null && grid[0][i] == grid[1][i] && grid[1][i] == grid[2][i]) {
                 isWin = true;
-                winner = grip[0][i];
+                winner = grid[0][i];
                 return;
             }
 
             if (allFilled) {
                 for (int j = 0; j < 3; j++) {
-                    if (grip[i][j] == null) {
+                    if (grid[i][j] == null) {
                         allFilled = false;
                         break;
                     }
@@ -230,15 +230,15 @@ public class ServerGame {
         }
 
         // check diagonals
-        if (grip[0][0] != null && grip[0][0] == grip[1][1] && grip[1][1] == grip[2][2]) {
+        if (grid[0][0] != null && grid[0][0] == grid[1][1] && grid[1][1] == grid[2][2]) {
             isWin = true;
-            winner = grip[0][0];
+            winner = grid[0][0];
             return;
         }
 
-        if (grip[0][2] != null && grip[0][2] == grip[1][1] && grip[1][1] == grip[2][0]) {
+        if (grid[0][2] != null && grid[0][2] == grid[1][1] && grid[1][1] == grid[2][0]) {
             isWin = true;
-            winner = grip[0][2];
+            winner = grid[0][2];
             return;
         }
 
@@ -301,12 +301,12 @@ public class ServerGame {
     public String getGridState() {
         StringBuilder builder = new StringBuilder();
 
-        for (int i = 0; i < grip.length; i++) {
-            for (int j = 0; j < grip.length; j++) {
-                if (grip[i][j] == null) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid.length; j++) {
+                if (grid[i][j] == null) {
                     builder.append(" ");
                 } else {
-                    builder.append(grip[i][j].toString());
+                    builder.append(grid[i][j].toString());
                 }
             }
 
@@ -330,8 +330,8 @@ public class ServerGame {
         // simple bot logic: play the first available cell
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (this.grip[i][j] == null) {
-                    this.grip[i][j] = this.currentPlayer; // assuming bot is always O
+                if (this.grid[i][j] == null) {
+                    this.grid[i][j] = this.currentPlayer; // assuming bot is always O
                     toogleCurrentPlayer();
                     return;
                 }

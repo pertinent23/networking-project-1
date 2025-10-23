@@ -17,7 +17,7 @@ public class TictactoeResponse {
     private final ArrayList<String> params = new ArrayList<>();
 
     // Regex to validate the command if it matches the protocol
-    private final Pattern command_regex = Pattern.compile("^(\\s*[A-Za-z]+)(\\s+[A-Za-z]{2,})?(\\s+[A-Za-z]{2,})?(\\s+[A-Za-z]|\\s+\\-?[0-9]+)?(\\s+[A-Za-z]|\\s+\\-?[0-9]+)?\\s*\\r\\n(\\r\\n)?$");
+    private final Pattern command_regex = Pattern.compile("^([A-Z]+)(\\s+[A-Z]{2,})?(\\s+[A-Z]{2,})?(\\s+[A-Za-z]|\\s+\\-?[0-9]+)?(\\s+[A-Za-z]|\\s+\\-?[0-9]+)?\\s*\\r\\n(\\r\\n)?$");
 
     // Regex to validate the puzzle if it matches the protocol
     private final Pattern puzzle_regex = Pattern.compile("^([XxOo\\s]{3}\\r\\n){3}(([XxOo] WON|DRAW|OPPONENT QUIT)\\r\\n)?(\\r\\n)?$");
